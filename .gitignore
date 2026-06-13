@@ -1,0 +1,42 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Build output
+/bin/
+/tmp/
+dist/
+
+# Go workspace
+go.work
+go.work.sum
+
+# Test
+*.test
+coverage.out
+coverage.html
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE - GoLand / IntelliJ
+.idea/
+
+# IDE - VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Air temporary build
+tmp/main
+tmp/main.exe
