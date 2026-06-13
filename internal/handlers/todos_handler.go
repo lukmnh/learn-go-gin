@@ -102,8 +102,6 @@ func (h *TodoHandler) Delete(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "successfully deleted todo"})
 }
 
-// --- helpers ---
-
 func parseID(c *gin.Context) (int, error) {
 	return strconv.Atoi(c.Param("id"))
 }
