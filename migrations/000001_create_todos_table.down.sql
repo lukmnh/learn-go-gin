@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS golang.todos_user;

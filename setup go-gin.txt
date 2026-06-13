@@ -22,3 +22,19 @@ hot reload (any saved file server auto reload) -> go install github.com/air-vers
 
 (go get di pakai untuk import)
 (go install dipakai di terminal)
+
+run the migrations on terminal
+migrate -path migrations -database $env:D
+
+when to use var ... data type or :=
+-> var
+Bisa dipakai di mana?,Di package level & di dalam function
+Harus inisialisasi?,Tidak harus (default zero value)
+Type inference,Bisa (kalau diinisialisasi)
+Penggunaan umum,"Lebih formal, zero value, package level"
+
+-> :=
+Hanya di dalam function
+Harus inisialisasi saat deklarasi
+Selalu infer type otomatis
+Paling sering dipakai di dalam function
