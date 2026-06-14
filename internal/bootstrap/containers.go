@@ -6,15 +6,24 @@ import (
 	"todo_rest_api/internal/router"
 	"todo_rest_api/internal/service"
 
-	"github.com/jackc/pgx/v5/pgxpool"
+	"gorm.io/gorm"
 )
 
-func BuildHandler(pool *pgxpool.Pool) *router.TodoHandler {
-	todoRepo := repository.NewTodoRepository(pool)
-	todoService := service.NewTodoService(todoRepo)
-	todoHandler := handlers.NewTodoHandler(todoService)
+func buildTodoModule(db *gorm.DB) *handlers.TodoHandler {
+	repo := repository.NewTodoRepository(db)
+	svc := service.NewTodoService(repo)
+	return handlers.NewTodoHandler(svc)
+}
 
-	return &router.TodoHandler{
-		Todo: todoHandler,
+func buildUsersModule(db *gorm.DB) *handlers.UsersHandler {
+	repo := repository.NewUsersRepository(db)
+	svc := service.NewUsersService(repo)
+	return handlers.NewUsersHandler(svc)
+}
+
+func BuildHandler(db *gorm.DB) *router.Handler {
+	return &router.Handler{
+		Todo:  buildTodoModule(db),
+		Users: buildUsersModule(db),
 	}
 }

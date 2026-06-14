@@ -2,15 +2,17 @@ package router
 
 import (
 	"todo_rest_api/internal/handlers"
+	"todo_rest_api/internal/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
-type TodoHandler struct {
-	Todo *handlers.TodoHandler
+type Handler struct {
+	Todo  *handlers.TodoHandler
+	Users *handlers.UsersHandler
 }
 
-func Setup(h *TodoHandler) *gin.Engine {
+func Setup(h *Handler) *gin.Engine {
 	r := gin.Default()
 	r.SetTrustedProxies(nil)
 
@@ -24,7 +26,13 @@ func Setup(h *TodoHandler) *gin.Engine {
 
 	api := r.Group("/api")
 	{
+		users := api.Group("/users")
+		{
+			users.POST("", h.Users.Create)
+			users.POST("/login", h.Users.Login)
+		}
 		todos := api.Group("/todos")
+		todos.Use(middleware.AuthRequired())
 		{
 			todos.POST("", h.Todo.Create)
 			todos.GET("", h.Todo.GetAll)

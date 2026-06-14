@@ -31,7 +31,6 @@ func (s *todoService) CreateTodo(ctx context.Context, req dto.CreateTodoReq) (*d
 	ctx, cancel := context.WithTimeout(ctx, dbTimeout)
 	defer cancel()
 
-	// contoh business logic: trim whitespace title
 	title := strings.TrimSpace(req.Title)
 
 	todo, err := s.repo.Create(ctx, title, req.Completed)

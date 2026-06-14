@@ -38,3 +38,12 @@ Hanya di dalam function
 Harus inisialisasi saat deklarasi
 Selalu infer type otomatis
 Paling sering dipakai di dalam function
+
+Operasi,    Spring Data ||  JPA,GORM
+Insert,     repo.save(user) ||db.Create(&user)
+Update,     repo.save(user) (jika ID ada) || "db.Save(&user) atau db.Model(&user).Updates(User{Name: ""Baru""})"
+Delete,     repo.delete(user) || db.Delete(&user)
+Find All,   repo.findAll() || db.Find(&users)
+Find By ID, repo.findById(id) || "db.First(&user, id)"
+Custom Query,findByEmailAndAge(...) || "db.Where(""email = ? AND age = ?"", ...).Find(&users)"
+Paging & Sorting,Pageable object || "db.Limit(10).Offset(0).Order(""age desc"").Find(&users)"
